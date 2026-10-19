@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>500 More</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="500 More"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#2f6b4f">
+<title>500 More</title><link rel="manifest" href="manifest.json"><link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="500 More"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#2f6b4f">
 <style>
 :root{--bg:#f3efe5;--fg:#25322b;--mut:#6a766d;--card:#fbf9f3;--line:#ddd6c4;--acc:#2f6b4f;--hi:#c4622d}
 @media(prefers-color-scheme:dark){:root{--bg:#131b17;--fg:#e8eee9;--mut:#9bb0a3;--card:#1c2721;--line:#33453b;--acc:#7fc8a0;--hi:#ff9a5e}}
@@ -9,7 +9,7 @@ html,body{margin:0;min-height:100%}
 body{background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:calc(18px + env(safe-area-inset-top,0)) 16px calc(24px + env(safe-area-inset-bottom,0))}
 main{max-width:560px;margin:0 auto}
 header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-header img{width:48px;height:48px;border-radius:12px;box-shadow:0 1px 4px #0003}
+header img{width:48px;height:48px;border-radius:50%}
 h1{font:700 1.6rem Georgia,serif;margin:0}
 header small{color:var(--mut)}
 .tc{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:12px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 3px #0001}
@@ -30,9 +30,9 @@ footer a{color:var(--mut)}
 <div id="list"><p class="msg">Loading trips…</p></div>
 <footer>App version 5 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=5"></script>
+<script src="theme.js?v=6"></script>
 <script>
-var V=5,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=6,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){
