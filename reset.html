@@ -1,0 +1,14 @@
+<!DOCTYPE html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>App check</title>
+<body style="font:16px system-ui;padding:16px;max-width:640px;margin:auto"><h2>App check</h2><pre id="o" style="white-space:pre-wrap"></pre>
+<button id="b" style="padding:10px 16px;font:inherit">Clear saved app data and open the app</button>
+<script>
+const o=document.getElementById("o"),log=t=>o.textContent+=t+"\n";
+(async()=>{for(const f of["index.html","trip.html","app.js","trips/index.json","lib/leaflet.js","lib/leaflet.css","sw.js"]){try{const r=await fetch(f+"?x="+Date.now(),{cache:"no-store"}),t=await r.text();log(f+": "+r.status+", "+t.length+" bytes"+(f=="app.js"?", version "+((t.match(/const VER=(\d+)/)||[])[1]||"?"):""))}catch(e){log(f+": FAILED ("+e.message+")")}}
+if(navigator.serviceWorker){log("service workers registered: "+(await navigator.serviceWorker.getRegistrations()).length)}
+if(self.caches)log("saved caches: "+((await caches.keys()).join(", ")||"none"));
+try{const r=await fetch("https://api.open-meteo.com/v1/elevation?latitude=47.95&longitude=-123.8");log("elevation service: "+r.status)}catch(e){log("elevation service: BLOCKED")}
+try{await fetch("https://a.tile.opentopomap.org/5/5/10.png",{mode:"no-cors"});log("map tiles: reachable")}catch(e){log("map tiles: BLOCKED")}
+try{const r=await fetch("https://overpass-api.de/api/status");log("water service: "+r.status)}catch(e){log("water service: BLOCKED")}
+log("done")})();
+document.getElementById("b").onclick=async()=>{try{for(const r of await navigator.serviceWorker.getRegistrations())if(location.href.indexOf(r.scope)==0)await r.unregister();for(const k of await caches.keys())if(k.indexOf("m5-")==0)await caches.delete(k);localStorage.clear()}catch(e){}location.href="./?fresh="+Date.now()};
+</script>

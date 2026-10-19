@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>500 More</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="500 More"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#2f6b4f">
+<link rel="stylesheet" href="lib/leaflet.css">
+<style>
+:root{--bg:#f3efe5;--fg:#25322b;--mut:#6a766d;--card:#fbf9f3;--line:#ddd6c4;--acc:#2f6b4f;--hi:#c4622d}
+@media(prefers-color-scheme:dark){:root{--bg:#131b17;--fg:#e8eee9;--mut:#9bb0a3;--card:#1c2721;--line:#33453b;--acc:#7fc8a0;--hi:#ff9a5e}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;margin:0;-webkit-text-size-adjust:100%}@supports(height:100dvh){html,body{height:100dvh}}
+body{background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#map{position:absolute;z-index:0;top:0;left:0;right:0;bottom:calc(var(--sh,45%) - 22px)}#map .leaflet-bottom{margin-bottom:22px}
+#sheet{position:absolute;z-index:2;left:0;right:0;bottom:0;height:var(--sh,45%);background:var(--bg);border:4px solid var(--acc);border-bottom:0;overflow:hidden;box-shadow:0 -4px 14px #0003;border-radius:22px 22px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0)}
+#tabs{display:flex;gap:6px;padding:8px 10px}
+#tabs button,.btn{flex:1;padding:9px 0;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;font:inherit;font-weight:600}
+#tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+#body{overflow:auto;padding:0 14px 16px;flex:1}
+h2{font:700 1.25rem Georgia,serif;margin:4px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 5px;text-align:center;box-shadow:0 1px 3px #0001}.stats b{display:block;white-space:nowrap;font:700 clamp(.76rem,3.3vw,1rem) Georgia,serif}.stats span{color:var(--mut);font-size:.8rem}
+.stop{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.stop i{flex:none;width:24px;height:24px;border-radius:50%;background:var(--hi);color:var(--bg);font:700 .8rem/24px system-ui;text-align:center;font-style:normal}.mk,.stop i{display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;font-style:normal;font-weight:700}.ic{display:inline-block;vertical-align:-2px}.mk .ic,.fab .ic,.stop i .ic{display:block;vertical-align:baseline}#elv .ic{margin-right:3px}#elv,#prg{white-space:nowrap}.sun{margin:6px 0;white-space:nowrap;font-size:clamp(.7rem,3vw,.8rem)}.sun .ic{margin-right:2px}.leg .ic{display:inline;vertical-align:-2px}.mk.w{background:#1e88e5;width:17px;height:17px;border-width:1.5px;opacity:.85;box-shadow:none}
+.mk{width:28px;height:28px;border-radius:50%;border:2px solid #fff;font-size:15px;line-height:24px;box-shadow:0 1px 4px #0006}
+.mk.s,.mk.e,.stop.s i,.stop.e i{background:#d32f2f}.mk.s,.mk.e{width:34px;height:34px;border-radius:9px;font-size:18px;line-height:30px;margin:-3px}
+.mk.c,.stop.c i{background:#1e6fe0}.mk.p,.stop.p i{background:#f5a623;color:#3a2a00}
+.stop i{font-size:.95rem;line-height:24px}.leg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;color:var(--mut);margin:8px 0}.leg b{color:var(--fg)}
+.stop p{margin:0}small{color:var(--mut)}
+svg.pr{width:100%;background:var(--card);border:1px solid var(--line);border-radius:8px}
+details{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;box-shadow:0 1px 3px #0001}summary{color:var(--mut);font-weight:600}
+.fab{position:absolute;right:10px;z-index:900;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:1.15rem;box-shadow:0 2px 8px #0002;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .12s}.fab:active{transform:scale(.92)}
+.num{background:var(--hi);color:#fff;border:2px solid #fff;border-radius:50%;font:700 11px/18px system-ui;text-align:center}.num.c{background:var(--acc)}
+.wat{font-size:16px;text-align:center;line-height:20px}
+#toast{position:absolute;top:calc(8px + env(safe-area-inset-top,0));left:50%;transform:translateX(-50%);z-index:1000;background:var(--card);color:var(--fg);border:1px solid var(--line);padding:6px 12px;border-radius:16px;font-size:.85rem;display:none}
+#hud{max-width:calc(100% - 64px);position:absolute;left:10px;top:calc(10px + env(safe-area-inset-top,0));z-index:900;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.chip{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:12px;padding:4px 8px;box-shadow:0 2px 8px #0002;font-size:.8rem;font-family:inherit}
+#cmp{display:flex;flex-direction:column;align-items:center;gap:0;min-width:54px}.hrow{display:flex;gap:6px;align-items:flex-start}#cmp b{font-size:.8rem}
+#dial{width:41px;height:41px;transition:transform .15s linear}
+#grab{flex:none;height:22px;background:color-mix(in srgb,var(--acc) 16%,var(--bg));border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab}#grab span{width:48px;height:5px;border-radius:3px;background:var(--acc);opacity:.6}
+.snap #map{transition:bottom .28s ease}.snap #sheet{transition:height .28s ease}
+#body.fx{animation:fx .3s ease}@keyframes fx{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+svg.pr{touch-action:pan-y;cursor:crosshair}.pro{margin:4px 2px 8px;min-height:1.4em}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.dcard{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;padding:10px 12px;margin:10px 0;box-shadow:0 1px 3px #0001}.dcard.clk{cursor:pointer}.dcard.clk:active{transform:scale(.99)}
+.dh{display:flex;align-items:center;gap:8px}.dh b{font:700 1.05rem Georgia,serif}.dpill{background:var(--c);color:#111;font-weight:700;font-size:.8rem;padding:2px 11px;border-radius:14px;white-space:nowrap}
+.dsub{color:var(--mut);font-size:.82rem;margin:3px 0 7px}.dr{display:flex;justify-content:space-between;gap:6px;font-size:clamp(.72rem,3.2vw,.88rem);font-weight:600;white-space:nowrap}.dr .ic{display:inline;vertical-align:-2px;color:var(--mut)}
+.pb{height:8px;border-radius:4px;background:var(--line);margin:9px 0 3px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--c);transition:width .5s ease}.pt{color:var(--mut);font-size:.75rem}
+.opt{display:block;width:100%;text-align:left;padding:8px 12px;border:0;background:none;color:var(--fg);font:inherit;border-radius:8px;white-space:nowrap}.opt[aria-checked=true]{font-weight:700;color:var(--acc)}
+</style></head><body>
+<div id="map"></div><div id="toast"></div>
+<button class="fab" id="loc" style="top:calc(10px + env(safe-area-inset-top,0))" title="My location">◎</button>
+<button class="fab" id="wtr" style="top:calc(60px + env(safe-area-inset-top,0))" title="Water spots">💧</button>
+<button class="fab" id="lns" style="top:calc(110px + env(safe-area-inset-top,0))" title="Show or hide trip lines">〰</button>
+<button class="fab" id="lay" style="right:10px;bottom:calc(var(--sh,45%) + 30px)" title="Map style"></button>
+<div class="chip" id="laymenu" style="display:none;position:absolute;right:58px;bottom:calc(var(--sh,45%) + 30px);z-index:950;padding:2px"><button class="opt" data-b="topo" aria-checked="true">Topo</button><button class="opt" data-b="sat" aria-checked="false">Satellite <small>(online only)</small></button></div>
+<div id="hud"><div class="hrow"><button class="chip" id="cmp" title="Compass (true north). Tap to enable."><span style="font-size:10px;line-height:8px;color:var(--hi)">▼</span><svg id="dial" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="var(--line)" stroke-width="2"/><polygon points="24,5 29,24 19,24" fill="#d32f2f"/><polygon points="24,43 29,24 19,24" fill="var(--mut)"/><text x="24" y="17" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">N</text></svg><b id="hd">–°</b></button><div class="chip" id="elv">⛰ <small>waiting for GPS</small></div></div></div>
+<div class="chip" id="tstb" style="display:none;position:absolute;left:10px;bottom:calc(var(--sh,45%) + 86px);z-index:955;align-items:center;gap:8px;font-size:.75rem;padding:4px 6px 4px 9px;max-width:min(260px,80vw)"><span>Practice mode: tap the map to place yourself</span><button class="btn" id="tstx" style="flex:none;width:auto;padding:3px 9px;font-size:.75rem">Exit</button></div>
+<div class="chip" id="prg" style="display:none;position:absolute;left:10px;bottom:calc(var(--sh,45%) + 12px);z-index:900;max-width:min(190px,62vw);font-size:.72rem;line-height:1.35;padding:4px 7px"></div>
+<div id="sheet"><div id="grab" role="separator" aria-label="Drag to resize the panel"><span></span></div><div id="tabs"></div><div id="body"><p style="padding:6px 14px"><b>Starting app…</b><br><small>Page version 1. If this message stays, the app did not finish starting.</small></p></div></div>
+<script>if(navigator.serviceWorker){var rs0=/[?&]reset/.test(location.search),dir=location.href.replace(/[^\/]*(\?.*)?$/,"");navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){var w=r.active||r.waiting||r.installing,u=w?w.scriptURL:"";if(r.scope.indexOf(dir)==0&&(rs0||u!=dir+"sw.js"))r.unregister()})});if(rs0){caches.keys().then(function(k){k.forEach(function(n){if(n.indexOf("m5-")==0)caches.delete(n)})});try{localStorage.clear()}catch(e){}}}</script><script>addEventListener("error",function(e){var b=document.getElementById("body");if(b)b.innerHTML="<p><b>Something went wrong.</b></p><p><small>"+e.message+" ("+String(e.filename||"").split("/").pop()+":"+e.lineno+")</small></p>"})</script><script src="lib/leaflet.js"></script><script>var T=(location.search.match(/[?&]t=([a-z0-9_-]+)/i)||[])[1];if(!T)location.replace("./");else fetch("trips/"+T+"/trip.json?v=1").then(function(r){if(!r.ok)throw new Error(r.status==404?"That trip was not found":"HTTP "+r.status);return r.json()}).then(function(t){t.id=T;window.TRIP=t;try{localStorage.lastTrip=T}catch(e){}document.title=t.name;var s=document.createElement("script");s.src="app.js?v=1";document.body.appendChild(s)}).catch(function(e){var b=document.getElementById("body");if(b)b.innerHTML="<p><b>Could not load the trip.</b></p><p><small>"+e.message+". Open it once with a connection. <a href=\"./\">All trips</a></small></p>"})</script>
+<script>if("serviceWorker" in navigator){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener("controllerchange",function(){if(had)location.reload();had=true});navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){r.update()})}</script>
+</body></html>
