@@ -1,4 +1,4 @@
-const V=6,APP="m5-app-"+V,BROWSE="m5-tiles-browse",
+const V=7,APP="m5-app-"+V,BROWSE="m5-tiles-browse",
 F=["./","index.html","trip.html","app.js?v="+V,"theme.js?v="+V,"trips/index.json?v="+V,"lib/leaflet.js","lib/leaflet.css","lib/images/marker-icon.png","lib/images/marker-icon-2x.png","lib/images/marker-shadow.png","lib/images/layers.png","lib/images/layers-2x.png","manifest.json","logo.svg","icon-180.png","icon-192.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(APP).then(async c=>{await Promise.all(F.map(u=>c.add(new Request(u,{cache:"reload"})).catch(()=>0)));try{const j=await (await fetch("trips/index.json?v="+V,{cache:"reload"})).json();await Promise.all(j.trips.map(t=>c.add(new Request("trips/"+t.id+"/trip.json?v="+V,{cache:"reload"})).catch(()=>0)))}catch(_){}}).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(n=>n.indexOf("m5-app-")==0&&n!=APP).map(n=>caches.delete(n)))).then(()=>self.clients.claim()))});
