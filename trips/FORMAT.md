@@ -11,10 +11,11 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `name` | yes | Full trip title, shown at the top of the overview. |
 | `short` | yes | Short name, used in share text. |
 | `region` | yes | Where it is. Shown as "N days in the <region>". |
-| `activity` | yes | `hike`, `bike` or `paddle`. Only `hike` timing is built so far. |
+| `activity` | yes | `hike`, `bike` or `paddle`. Sets the colour theme (hike green, bike earthy brown, paddle blue and sage). Only `hike` timing is built so far. |
 | `timezone` | yes | IANA name (e.g. `America/Vancouver`). Used for sunrise and sunset. |
 | `declination` | no | Magnetic declination in degrees east, for the compass. Default 0. |
 | `weather` | yes | `{ "lat": .., "lon": .. }`, a point near the middle of the trip for the forecast. |
+| `dayColors` | no | List of colours for the days. Leave it out to use the shared default (muted orange, yellow, green, teal, purple). |
 | `offline` | no | Map saving settings, see below. |
 | `route` | yes | The whole route: `[[lat, lng, km], ...]`. `km` is distance from the start, rising. |
 | `elevation` | yes | One elevation in metres per route point, same order and length as `route`. |

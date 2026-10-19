@@ -14,7 +14,6 @@ h1{font:700 1.6rem Georgia,serif;margin:0}
 header small{color:var(--mut)}
 .tc{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:12px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 3px #0001}
 .tc:active{transform:scale(.99)}
-.tc.last{border-left-color:var(--hi)}
 .th{display:flex;align-items:center;gap:8px;justify-content:space-between}
 .th b{font:700 1.08rem Georgia,serif}
 .pill{flex:none;background:var(--acc);color:var(--bg);font-weight:700;font-size:.75rem;padding:2px 10px;border-radius:14px}
@@ -29,20 +28,21 @@ footer a{color:var(--mut)}
 <main>
 <header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
 <div id="list"><p class="msg">Loading trips…</p></div>
-<footer>App version 1 · <a href="reset.html">App check</a></footer>
+<footer>App version 2 · <a href="reset.html">App check</a></footer>
 </main>
+<script src="theme.js?v=2"></script>
 <script>
-var V=1,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=2,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){
-  var box=document.getElementById("list"),last=ls("lastTrip");box.textContent="";
+  var box=document.getElementById("list"),last=ls("lastTrip"),dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);box.textContent="";
   if(!trips.length){box.appendChild(el("p","msg","No trips yet."));return}
   trips=trips.slice().sort(function(a,b){return (b.id==last)-(a.id==last)});
   trips.forEach(function(t){
-    var a=el("a","tc"+(t.id==last?" last":""));a.href="trip.html?t="+encodeURIComponent(t.id);
+    var a=el("a","tc"+(t.id==last?" last":""));a.href="trip.html?t="+encodeURIComponent(t.id);var th=themeOf(t.activity),tc=(dark?th.dark:th.light).acc;a.style.borderLeftColor=tc;
     if(t.id==last)a.appendChild(el("div","tag","Last opened"));
-    var h=el("div","th");h.appendChild(el("b","",t.name));h.appendChild(el("span","pill",KIND[t.activity]||"Trip"));a.appendChild(h);
+    var h=el("div","th");h.appendChild(el("b","",t.name));var pl=el("span","pill",KIND[t.activity]||"Trip");pl.style.background=tc;h.appendChild(pl);a.appendChild(h);
     var bits=[t.region,t.days+(t.days==1?" day":" days"),t.km+" km"].filter(Boolean);a.appendChild(el("small","",bits.join(" · ")));
     var m=null;try{m=JSON.parse(ls(t.id+":map")||"null")}catch(e){}
     a.appendChild(el("small","ms",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved yet"));
