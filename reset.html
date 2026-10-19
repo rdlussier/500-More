@@ -10,5 +10,5 @@ try{const r=await fetch("https://api.open-meteo.com/v1/elevation?latitude=47.95&
 try{await fetch("https://a.tile.opentopomap.org/5/5/10.png",{mode:"no-cors"});log("map tiles: reachable")}catch(e){log("map tiles: BLOCKED")}
 try{const r=await fetch("https://overpass-api.de/api/status");log("water service: "+r.status)}catch(e){log("water service: BLOCKED")}
 log("done")})();
-document.getElementById("b").onclick=async()=>{try{for(const r of await navigator.serviceWorker.getRegistrations())if(location.href.indexOf(r.scope)==0)await r.unregister();for(const k of await caches.keys())if(k.indexOf("m5-")==0)await caches.delete(k);localStorage.clear()}catch(e){}location.href="./?fresh="+Date.now()};
+document.getElementById("b").onclick=async()=>{try{for(const r of await navigator.serviceWorker.getRegistrations())if(location.href.indexOf(r.scope)==0)await r.unregister();for(const k of await caches.keys())if(k.indexOf("m5-")==0)await caches.delete(k);Object.keys(localStorage).forEach(function(k){if(k.indexOf(":")>0||k=="lastTrip")localStorage.removeItem(k)})}catch(e){}location.href="./?fresh="+Date.now()};
 </script>
