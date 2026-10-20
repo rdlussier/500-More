@@ -11,17 +11,18 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `name` | yes | Full trip title, shown at the top of the overview. |
 | `short` | yes | Short name, used in share text. |
 | `region` | yes | Where it is. Shown as "N days in the <region>". |
-| `activity` | yes | `hike`, `bike` or `paddle`. Sets the colour theme (hike green, bike earthy brown, paddle blue and sage). `hike` and `bike` timing are built (a `bike` trip uses 18 km/h plus 1 h per 600 m climbed, and gain tuned for rolling terrain). `paddle` timing is not built yet. |
+| `activity` | yes | `hike`, `bike` or `paddle`. Sets the colour theme (hike green, bike earthy brown, paddle blue and sage). `hike` and `bike` timing are built (a `bike` trip uses 18 km/h plus 1 h per 600 m climbed, and gain tuned for rolling terrain). `paddle` timing is built: 4 km/h for a loaded double sea kayak, scaled by pace (waiting for tides and breaks are not included). Paddle trips show no elevation, gain, loss or water spots. |
 | `timezone` | yes | IANA name (e.g. `America/Vancouver`). Used for sunrise and sunset. |
 | `declination` | no | Magnetic declination in degrees east, for the compass. Default 0. |
 | `weather` | yes | `{ "lat": .., "lon": .. }`, a point near the middle of the trip for the forecast. |
 | `dayColors` | no | List of colours for the days. Leave it out to use the shared default (muted orange, yellow, green, teal, purple). |
 | `offline` | no | Map saving settings, see below. |
 | `route` | yes | The whole route: `[[lat, lng, km], ...]`. `km` is distance from the start, rising. |
-| `elevation` | yes | One elevation in metres per route point, same order and length as `route`. |
+| `elevation` | yes (not for `paddle`) | One elevation in metres per route point, same order and length as `route`. Leave it out for `paddle` trips. |
+| `notes` | no | List of short notes shown in a box at the top of the overview. The first note is shown in bold in the highlight colour, so use it for a warning (for example a test trip). |
 | `days` | yes | List of days, see below. |
 | `sidetrips` | yes | Optional side routes (can be `[]`), see below. |
-| `water` | yes | Water spots (can be `[]`), see below. |
+| `water` | yes | Water spots (can be `[]`), see below. Not used for `paddle` trips. |
 
 ## Days
 
@@ -50,7 +51,7 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 `"prep": { "packing": "https://docs.google.com/...", "logistics": "https://docs.google.com/..." }`
 
 - `packing` shows a "Packing list" button and `logistics` shows a "Pre-trip logistics" button, under the trip card on the home screen in the trip's own colour, below a thin divider. A link that is missing is simply not shown. With no `prep` at all, no buttons are shown.
-- Each link must start with `https://`.
+- Each link must start with `https://`. To show a greyed-out placeholder button that does nothing, use `"soon"` instead of a link (shown as "Logistics (soon)").
 - Links need internet and are never saved for offline use. Offline, tapping one shows a "Needs internet" message.
 - This repo and site are public, so anyone can read these links. Share each Google file with friends by email (not "anyone with the link"), use the plain link without the `?usp=` or `ouid=` parts, and never put permit numbers or confirmation codes in a linked file that has open access.
 

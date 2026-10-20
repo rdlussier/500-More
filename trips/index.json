@@ -1,6 +1,7 @@
 {
 "trips":[
 {"id":"olympic-high-divide","name":"High Divide and Appleton Pass Loop","region":"Olympic Mountains","activity":"hike","days":4,"km":42.2,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit","logistics":"https://docs.google.com/document/d/1vQCEntkVxjLmSdxhffL18ixoY-JiS1TPqnGJI9D_6Ik/edit"}},
-{"id":"bc-grasslands-circuit","name":"BC Grasslands Circuit","region":"BC Grasslands","activity":"bike","days":4,"km":249.8,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit","logistics":"https://docs.google.com/document/d/1bgL5RM2v4d8_-1frb0RnxbHhmA2ZiL6DAQ-Hf1QAbsY/edit"}}
+{"id":"bc-grasslands-circuit","name":"BC Grasslands Circuit","region":"BC Grasslands","activity":"bike","days":4,"km":249.8,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit","logistics":"https://docs.google.com/document/d/1bgL5RM2v4d8_-1frb0RnxbHhmA2ZiL6DAQ-Hf1QAbsY/edit"}},
+{"id":"telegraph-cove-paddle-test","name":"Telegraph Cove Paddle (test)","region":"Broughton Archipelago","activity":"paddle","days":5,"km":48.3,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit","logistics":"soon"}}
 ]
 }
