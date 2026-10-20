@@ -17,7 +17,6 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `weather` | yes | `{ "lat": .., "lon": .. }`, a point near the middle of the trip for the forecast. |
 | `dayColors` | no | List of colours for the days. Leave it out to use the shared default (muted orange, yellow, green, teal, purple). |
 | `offline` | no | Map saving settings, see below. |
-| `links` | no | Trip prep links to shared Google Docs or Sheets, see below. Leave it out to hide the section. |
 | `route` | yes | The whole route: `[[lat, lng, km], ...]`. `km` is distance from the start, rising. |
 | `elevation` | yes | One elevation in metres per route point, same order and length as `route`. |
 | `days` | yes | List of days, see below. |
@@ -44,15 +43,6 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 
 `{ "lat": .., "lng": .., "n": "Name", "d": metres_from_route, "km": route_km }`.
 
-## Trip prep links
-
-`"links": [{ "label": "Packing list", "url": "https://docs.google.com/...", "note": "Optional one-line note" }]`
-
-- Shown as big buttons under the day cards on the trip overview, in a "Trip prep" section. If the list is missing or empty, nothing is shown.
-- `label` and `url` are required. `url` must start with `https://`. `note` is optional.
-- Links need internet and are never saved for offline use. Offline, tapping one shows a "Needs internet" message.
-- This repo and site are public, so anyone can read these links. Share the Google files with friends by email (not "anyone with the link"), use the plain link without the `?usp=` or `ouid=` parts, and never put permit numbers or confirmation codes in a linked file that has open access.
-
 ## Offline map
 
 - `{ "mode": "box", "padding": 0.15, "zoomMin": 11, "zoomMax": 15 }` saves a rectangle around the whole route. Good for short loops.
@@ -63,5 +53,4 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 1. Build `trips/<id>/trip.json` from the route file and the trip plan.
 2. Check that `route` and `elevation` have the same length and that days run from km 0 to the last route km with no gaps.
 3. Add one line for it to `trips/index.json`: `{"id": "..", "name": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}`. This is what the home screen shows.
-4. Add Trip prep `links` (packing list, to-do list, permits and bookings) if the group has shared Google files for the trip.
-5. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
+4. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
