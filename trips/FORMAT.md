@@ -11,7 +11,7 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `name` | yes | Full trip title, shown at the top of the overview. |
 | `short` | yes | Short name, used in share text. |
 | `region` | yes | Where it is. Shown as "N days in the <region>". |
-| `activity` | yes | `hike`, `bike` or `paddle`. Sets the colour theme (hike green, bike earthy brown, paddle blue and sage). `hike` and `bike` timing are built (a `bike` trip uses 18 km/h plus 1 h per 600 m climbed, and gain tuned for rolling terrain). `paddle` timing is built: 4 km/h for a loaded double sea kayak, scaled by pace (waiting for tides and breaks are not included). Paddle trips show no elevation, gain, loss or water spots. |
+| `activity` | yes | `hike`, `bike` or `paddle`. Sets the colour theme (hike green, bike earthy brown, paddle blue and sage). `hike` and `bike` timing are built (a `bike` trip uses 18 km/h plus 1 h per 600 m climbed, and gain tuned for rolling terrain). `paddle` timing is built: 4 km/h for a loaded double sea kayak, scaled by pace (waiting for tides and breaks are not included). Paddle trips show no elevation or gain and loss. Their water button shows fresh water only (streams, springs and lakes within about 500 m of the route, from OpenStreetMap, so it depends on how well the area is mapped). Weather, Wind (hourly, 6 am to 8 pm) and Tides each get their own dropdown. |
 | `timezone` | yes | IANA name (e.g. `America/Vancouver`). Used for sunrise and sunset. |
 | `declination` | no | Magnetic declination in degrees east, for the compass. Default 0. |
 | `weather` | yes | `{ "lat": .., "lon": .. }`, a point near the middle of the trip for the forecast. |
@@ -22,7 +22,7 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `notes` | no | List of short notes shown in a box at the top of the overview. The first note is shown in bold in the highlight colour, so use it for a warning (for example a test trip). |
 | `days` | yes | List of days, see below. |
 | `sidetrips` | yes | Optional side routes (can be `[]`), see below. |
-| `tides` | no | High and low tide times for the days of the trip, shown with the weather. `{ "station": "Alert Bay", "code": "08280", "id": "<CHS station id>", "source": "Canadian Hydrographic Service predictions", "datum": "chart datum" }`. The app pulls the highs and lows from the CHS tide service (IWLS, time series `wlp-hilo`) when the trip date is set and saves them on the phone, so they work offline afterwards. Heights only, not currents. |
+| `tides` | no | High and low tide times for the days of the trip, in a dropdown titled `Tides - <station>`. `{ "station": "Alert Bay", "code": "08280", "id": "<CHS station id>", "source": "Canadian Hydrographic Service predictions", "datum": "chart datum" }`. The app pulls the highs and lows from the CHS tide service (IWLS, time series `wlp-hilo`) when the trip date is set and saves them on the phone, so they work offline afterwards. Heights only, not currents. |
 | `water` | yes | Water spots (can be `[]`), see below. Not used for `paddle` trips. |
 
 ## Days
@@ -68,3 +68,7 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 3. Add one line for it to `trips/index.json`: `{"id": "..", "name": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}`. This is what the home screen shows.
 4. Add the trip's Trip prep links to that same line if the group has shared Google files (see "Trip prep links" below).
 5. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
+
+## Map symbol legend
+
+The (i) button on the map explains the base map's built-in symbols. Each activity has a fixed list (pictures are real OpenTopoMap symbols in `legend/`, listed in `legend.js`). A trip can override it with `"legend": ["peak", "campsite", ...]` using the keys in `legend.js`. The app cannot detect which symbols actually appear in an area.
