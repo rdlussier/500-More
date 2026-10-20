@@ -5,6 +5,7 @@
 "short":"High Divide",
 "region":"Olympic Mountains",
 "activity":"hike",
+"links":[{"label":"Packing list","url":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit","note":"Backcountry Packing List. Add what you're bringing."}],
 "timezone":"America/Los_Angeles",
 "declination":15,
 "weather":{"lat":47.955,"lon":-123.835},
