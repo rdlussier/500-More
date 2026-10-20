@@ -49,7 +49,7 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 
 `"prep": { "packing": "https://docs.google.com/...", "logistics": "https://docs.google.com/..." }`
 
-- `packing` shows a "Packing list" button and `logistics` shows a "Pre-trip logistics" button, under the trip card on the home screen in the trip's own colour. A link that is missing is simply not shown. With no `prep` at all, no buttons are shown.
+- `packing` shows a "Packing list" button and `logistics` shows a "Pre-trip logistics" button, under the trip card on the home screen in the trip's own colour, below a thin divider. A link that is missing is simply not shown. With no `prep` at all, no buttons are shown.
 - Each link must start with `https://`.
 - Links need internet and are never saved for offline use. Offline, tapping one shows a "Needs internet" message.
 - This repo and site are public, so anyone can read these links. Share each Google file with friends by email (not "anyone with the link"), use the plain link without the `?usp=` or `ouid=` parts, and never put permit numbers or confirmation codes in a linked file that has open access.
@@ -63,6 +63,6 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 
 1. Build `trips/<id>/trip.json` from the route file and the trip plan.
 2. Check that `route` and `elevation` have the same length and that days run from km 0 to the last route km with no gaps.
-3. Add one line for it to `trips/index.json`: `{"id": "..", "name": "..", "short": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}`. This is what the home screen shows. `short` is the short trip name used in the "Trip prep for ..." label.
+3. Add one line for it to `trips/index.json`: `{"id": "..", "name": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}`. This is what the home screen shows.
 4. Add the trip's Trip prep links to that same line if the group has shared Google files (see "Trip prep links" below).
 5. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.

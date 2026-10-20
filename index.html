@@ -17,8 +17,8 @@ header small{color:var(--mut)}
 .top:active{background:color-mix(in srgb,var(--tc,var(--acc)) 10%,transparent)}
 .tt{flex:1;min-width:0}
 .go{flex:none;display:flex;flex-direction:column;align-items:center;font-size:.72rem;font-weight:700;color:var(--tc,var(--acc))}
-.prep{padding:8px 14px 12px;border-top:1px solid var(--line)}
-.pr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px}.pr.one{grid-template-columns:1fr}
+.prep{padding:10px 14px 12px;border-top:1px solid var(--line)}
+.pr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pr.one{grid-template-columns:1fr}
 .pb{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:8px;font-weight:700;font-size:.82rem;white-space:nowrap;text-decoration:none;color:var(--tc,var(--acc));background:color-mix(in srgb,var(--tc,var(--acc)) 14%,var(--card));border:1px solid color-mix(in srgb,var(--tc,var(--acc)) 35%,var(--line))}
 .pb:active{transform:scale(.98)}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:16px;font-size:.85rem;display:none;z-index:10}
@@ -36,11 +36,11 @@ footer a{color:var(--mut)}
 <main>
 <header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
 <div id="list"><p class="msg">Loading trips…</p></div><div id="toast"></div>
-<footer>App version 8 · <a href="reset.html">App check</a></footer>
+<footer>App version 9 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=8"></script>
+<script src="theme.js?v=9"></script>
 <script>
-var V=8,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=9,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){
@@ -55,9 +55,9 @@ function show(trips){
     var bits=[t.region,t.days+(t.days==1?" day":" days"),t.km+" km"].filter(Boolean);tt.appendChild(el("small","",bits.join(" · ")));
     var m=null;try{m=JSON.parse(ls(t.id+":map")||"null")}catch(e){}
     tt.appendChild(el("small","ms",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved yet"));
-    a.appendChild(tt);var go=el("div","go");go.innerHTML=ICON.go+"<span>Open trip</span>";a.appendChild(go);card.appendChild(a);
+    a.appendChild(tt);var go=el("div","go");go.innerHTML=ICON.go;go.setAttribute("aria-hidden","true");a.appendChild(go);card.appendChild(a);
     var pp=t.prep||{},items=[["packing","Packing list",ICON.list],["logistics","Pre-trip logistics",ICON.clip]].filter(function(x){return typeof pp[x[0]]=="string"&&/^https:\/\//.test(pp[x[0]])});
-    if(items.length){var pd=el("div","prep");pd.appendChild(el("small","","Trip prep for "+(t.short||t.name)));var row=el("div","pr"+(items.length==1?" one":""));
+    if(items.length){var pd=el("div","prep");var row=el("div","pr"+(items.length==1?" one":""));
      items.forEach(function(x){var b=el("a","pb");b.href=pp[x[0]];b.target="_blank";b.rel="noopener noreferrer";b.innerHTML=x[2];b.appendChild(el("span","",x[1]));b.onclick=function(e){if(navigator.onLine===false){e.preventDefault();toast("Needs internet. This link opens a Google file.")}};row.appendChild(b)});
      pd.appendChild(row);card.appendChild(pd)}
     box.appendChild(card)})}
