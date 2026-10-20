@@ -37,13 +37,13 @@ footer a{color:var(--mut)}
 <main>
 <header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
 <div id="list"><p class="msg">Loading trips…</p></div><div id="toast"></div>
-<footer>App version 17 · <a href="reset.html">App check</a></footer>
+<footer>App version 18 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=17"></script>
+<script src="theme.js?v=18"></script>
 <script>
 // Home is the top of the app: the back swipe does nothing here (installed app only)
 try{if(navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)){history.pushState({home:1},"");addEventListener("popstate",function(){history.pushState({home:1},"")})}}catch(e){}
-var V=17,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=18,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){

@@ -71,4 +71,4 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 
 ## Map symbol legend
 
-The (i) button on the map explains the base map's built-in symbols. Each activity has a fixed list (pictures are real OpenTopoMap symbols in `legend/`, listed in `legend.js`). A trip can override it with `"legend": ["peak", "campsite", ...]` using the keys in `legend.js`. The app cannot detect which symbols actually appear in an area.
+The (i) button on the map (paddle trips only, left of the map style button) explains the base map's built-in symbols. Each activity has a fixed list (pictures are real OpenTopoMap symbols in `legend/`, listed in `legend.js`). A trip can override it with `"legend": ["peak", "campsite", ...]` using the keys in `legend.js`. The app cannot detect which symbols actually appear in an area.
