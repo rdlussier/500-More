@@ -1,6 +1,6 @@
 {
 "trips":[
-{"id":"olympic-high-divide","name":"High Divide and Appleton Pass Loop","region":"Olympic Mountains","activity":"hike","days":4,"km":42.2},
-{"id":"bc-grasslands-circuit","name":"BC Grasslands Circuit","region":"BC Grasslands","activity":"bike","days":4,"km":249.8}
+{"id":"olympic-high-divide","name":"High Divide and Appleton Pass Loop","short":"High Divide","region":"Olympic Mountains","activity":"hike","days":4,"km":42.2,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit"}},
+{"id":"bc-grasslands-circuit","name":"BC Grasslands Circuit","short":"Grasslands","region":"BC Grasslands","activity":"bike","days":4,"km":249.8,"prep":{"packing":"https://docs.google.com/document/d/17ROvDhDBgj9puU4OYdH7-QUd5zA32nJYvVbCDa6s5h8/edit"}}
 ]
 }
