@@ -22,6 +22,7 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `notes` | no | List of short notes shown in a box at the top of the overview. The first note is shown in bold in the highlight colour, so use it for a warning (for example a test trip). |
 | `days` | yes | List of days, see below. |
 | `sidetrips` | yes | Optional side routes (can be `[]`), see below. |
+| `tides` | no | High and low tide times for the days of the trip, shown with the weather. `{ "station": "Alert Bay", "code": "08280", "id": "<CHS station id>", "source": "Canadian Hydrographic Service predictions", "datum": "chart datum" }`. The app pulls the highs and lows from the CHS tide service (IWLS, time series `wlp-hilo`) when the trip date is set and saves them on the phone, so they work offline afterwards. Heights only, not currents. |
 | `water` | yes | Water spots (can be `[]`), see below. Not used for `paddle` trips. |
 
 ## Days
