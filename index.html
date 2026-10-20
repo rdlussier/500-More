@@ -22,9 +22,9 @@ header small{color:var(--mut)}
 .pb{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:8px;font-weight:700;font-size:.82rem;white-space:nowrap;text-decoration:none;color:var(--tc,var(--acc));background:color-mix(in srgb,var(--tc,var(--acc)) 14%,var(--card));border:1px solid color-mix(in srgb,var(--tc,var(--acc)) 35%,var(--line))}
 .pb:active{transform:scale(.98)}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:16px;font-size:.85rem;display:none;z-index:10}
-.th{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.th{display:flex;align-items:flex-start;gap:8px;justify-content:space-between}
 .th b{font:700 1.08rem Georgia,serif}
-.pill{flex:none;background:var(--acc);color:var(--bg);font-weight:700;font-size:.75rem;padding:2px 10px;border-radius:14px}
+.pill{flex:none;display:inline-flex;align-items:center;height:1.57rem;margin-right:12px;background:var(--acc);color:var(--bg);font-weight:700;font-size:.75rem;padding:0 10px;border-radius:14px}
 .tc small{display:block;color:var(--mut)}
 .tc .ms{margin-top:4px;font-size:.78rem}
 .tag{color:var(--hi);font-weight:700;font-size:.75rem;margin-bottom:2px}
@@ -36,11 +36,11 @@ footer a{color:var(--mut)}
 <main>
 <header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
 <div id="list"><p class="msg">Loading trips…</p></div><div id="toast"></div>
-<footer>App version 9 · <a href="reset.html">App check</a></footer>
+<footer>App version 10 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=9"></script>
+<script src="theme.js?v=10"></script>
 <script>
-var V=9,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=10,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){
