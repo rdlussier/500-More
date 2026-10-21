@@ -63,11 +63,17 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 
 ## Adding a trip
 
-1. Build `trips/<id>/trip.json` from the route file and the trip plan.
-2. Check that `route` and `elevation` have the same length and that days run from km 0 to the last route km with no gaps.
-3. Add one line for it to `trips/index.json`: `{"id": "..", "name": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}`. This is what the home screen shows.
-4. Add the trip's Trip prep links to that same line if the group has shared Google files (see "Trip prep links" below).
-5. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
+1. If you have a GPX route (Gaia, Komoot, AllTrails, Garmin...), start from it: `node tools/gpx-to-trip.js route.gpx --id <id> --name "<name>" --activity hike --region "<place>" --days 4 --add-to-index`. It writes `trips/<id>/trip.json` (simplified route, km, even day split, `offline` settings, weather point) and adds the home screen line. Options are listed at the top of `tools/gpx-to-trip.js` (`--day-ends 12,30,45` to choose where days end, `--use-gpx-elevation`, `--timezone`, `--declination`). Day titles, descriptions and stop names come out as `TODO` and must be filled in. Without a GPX, build the file by hand from the plan.
+2. Fill in every `TODO`. Elevation and water spots for hike and bike trips are baked into the file (see the fields above); without them the first phone to open the trip must be online.
+3. Check the file: `node tools/check-trips.js <id>` (no id checks every trip). Fix every ERROR. Read every WARNING.
+4. Make sure the trip has its line in `trips/index.json`: `{"id": "..", "name": "..", "region": "..", "activity": "hike", "days": 4, "km": 42.2}` (the `--add-to-index` option does this).
+5. Add the trip's Trip prep links to that same line if the group has shared Google files (see "Trip prep links" below).
+6. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
+
+## Tools (`tools/`)
+
+- `check-trips.js`: checks trip files before publishing (fields, day and km continuity, stops inside their day, elevation length, `index.json` matches, leftover `TODO`).
+- `gpx-to-trip.js`: turns a GPX route into a starting trip file (see "Adding a trip"). It does not fetch elevation, water spots or tide stations; those still need adding.
 
 ## Map symbol legend
 

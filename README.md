@@ -8,3 +8,4 @@ An app for trip itineraries (hiking, biking, paddling). Open it, pick a trip, an
 - `sw.js` saves the app, every trip and the map tiles you choose for offline use.
 
 The High Divide app (Olympic Mountains) lives in its own repository and is not part of this app.
+- `tools/` has helpers for adding trips: `gpx-to-trip.js` (GPX route to starting trip file) and `check-trips.js` (checks trip files before publishing). Steps are in `trips/FORMAT.md`.
