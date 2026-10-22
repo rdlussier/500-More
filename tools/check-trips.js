@@ -39,6 +39,7 @@ for(const id of ids){
   if(e){if(Math.abs(end-e.km)>0.06)E.push("trips/index.json says "+e.km+" km but the route is "+end+" km");
    if(e.days!==(t.days||[]).length)E.push("trips/index.json says "+e.days+" days but the trip has "+(t.days||[]).length);
    ["name","region","activity"].forEach(k=>{if(e[k]!==t[k])E.push("\""+k+"\" differs between trips/index.json (\""+e[k]+"\") and trip.json (\""+t[k]+"\")")});
+   if("done" in e){if(!(Number.isInteger(e.done)&&e.done>=2000&&e.done<=2200))E.push("\"done\" in trips/index.json must be a 4-digit year (example: 2027)");if(!e.short)W.push("\"done\" is set but trips/index.json has no \"short\" name, so the Past trips list will use the full trip name")}
    const pp=e.prep||{};Object.keys(pp).forEach(k=>{if(!["packing","logistics"].includes(k))W.push("unknown prep button \""+k+"\"");else if(!(pp[k]=="soon"||/^https:\/\//.test(pp[k])))E.push("prep."+k+" must be an https link or \"soon\"")})}
   const D=Array.isArray(t.days)?t.days:[];
   if(!D.length)E.push("trip has no days");

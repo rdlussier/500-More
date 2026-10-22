@@ -70,6 +70,10 @@ Each trip's line in `trips/index.json` may have a `prep` object with up to two G
 5. Add the trip's Trip prep links to that same line if the group has shared Google files (see "Trip prep links" below).
 6. Raise the version number `V` at the top of `sw.js` (and the `v=` numbers in `index.html` and `trip.html`, and `VER` in `app.js`) so phones pick up the new trip and save it for offline use.
 
+## Past trips list
+
+The "Past trips" dropdown on the home page shows the trips already done, newest first, as `year  name`. The old trips are a fixed list (`PAST` near the bottom of `index.html`). To add a trip once it has been done, add `"done": <year>` and `"short": "<name>"` to its line in `trips/index.json`, for example `"done": 2027, "short": "High Divide"`. It appears in the list automatically (2027 High Divide) at the right place, and the trip card stays on the home page. If `short` is left out, the full trip name is used. `tools/check-trips.js` checks the year.
+
 ## Tools (`tools/`)
 
 - `check-trips.js`: checks trip files before publishing (fields, day and km continuity, stops inside their day, elevation length, `index.json` matches, leftover `TODO`).
