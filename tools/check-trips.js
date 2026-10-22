@@ -40,6 +40,10 @@ for(const id of ids){
    if(e.days!==(t.days||[]).length)E.push("trips/index.json says "+e.days+" days but the trip has "+(t.days||[]).length);
    ["name","region","activity"].forEach(k=>{if(e[k]!==t[k])E.push("\""+k+"\" differs between trips/index.json (\""+e[k]+"\") and trip.json (\""+t[k]+"\")")});
    if("done" in e){if(!(Number.isInteger(e.done)&&e.done>=2000&&e.done<=2200))E.push("\"done\" in trips/index.json must be a 4-digit year (example: 2027)");if(!e.short)W.push("\"done\" is set but trips/index.json has no \"short\" name, so the Past trips list will use the full trip name")}
+   {const a=e.startDate,b=t.startDate,ok=x=>x==null||/^\d{4}-\d\d-\d\d$/.test(x)&&!isNaN(Date.parse(x));
+    if(!ok(a)||!ok(b))E.push("startDate must look like 2027-07-15 (trip.json: "+b+", trips/index.json: "+a+")");
+    else if((a||null)!==(b||null))E.push("startDate differs between trips/index.json ("+a+") and trip.json ("+b+"); the home page reads index.json and the trip page reads trip.json, so set both the same");
+    else if(b){const last=new Date(Date.parse(b)+((t.days||[]).length+2)*864e5).toISOString().slice(0,10);if(new Date().toISOString().slice(0,10)>last)W.push("startDate "+b+" is in the past, so the app shows this trip as finished")}}
    const pp=e.prep||{};Object.keys(pp).forEach(k=>{if(!["packing","logistics"].includes(k))W.push("unknown prep button \""+k+"\"");else if(!(pp[k]=="soon"||/^https:\/\//.test(pp[k])))E.push("prep."+k+" must be an https link or \"soon\"")})}
   const D=Array.isArray(t.days)?t.days:[];
   if(!D.length)E.push("trip has no days");

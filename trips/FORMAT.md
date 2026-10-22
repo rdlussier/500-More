@@ -15,6 +15,7 @@ Every trip is one file: `trips/<id>/trip.json`. The folder name is the trip `id`
 | `timezone` | yes | IANA name (e.g. `America/Vancouver`). Used for sunrise and sunset. |
 | `declination` | no | Magnetic declination in degrees east, for the compass. Default 0. |
 | `weather` | yes | `{ "lat": .., "lon": .. }`, a point near the middle of the trip for the forecast. |
+| `startDate` | no | `"2027-07-15"`, the group's start date. Give the SAME value in `trips/index.json` (the home page reads that one, the trip page reads this one; `node tools/check-trips.js` flags a mismatch). It is the default for everyone; a friend can still pick their own date and a "Use the group's date" button switches back. Without it, the app uses today's date until someone sets one. 3 days after the last day (start date + days + 2) the trip counts as finished: the date is ignored, forecasts show "This trip finished", the home card shows "Finished <month year>", and the trip page shows a finished note. Changing a date is a normal update, so bump the version. |
 | `dayColors` | no | List of colours for the days. Leave it out to use the shared default (muted orange, yellow, green, teal, purple). |
 | `offline` | no | Map saving settings, see below. |
 | `route` | yes | The whole route: `[[lat, lng, km], ...]`. `km` is distance from the start, rising. |
