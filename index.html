@@ -6,46 +6,52 @@
 @media(prefers-color-scheme:dark){:root{--bg:#131b17;--fg:#e8eee9;--mut:#9bb0a3;--card:#1c2721;--line:#33453b;--acc:#7fc8a0;--hi:#ff9a5e}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%}
-body{background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:calc(18px + env(safe-area-inset-top,0)) 16px calc(24px + env(safe-area-inset-bottom,0))}
+body{background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top,0) 0 calc(24px + env(safe-area-inset-bottom,0))}
 main{max-width:560px;margin:0 auto}
-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-header img{width:48px;height:48px;border-radius:50%}
-h1{font:700 1.6rem Georgia,serif;margin:0}
-header small{color:var(--mut)}
-.tc{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:12px;margin:0 0 12px;box-shadow:0 1px 3px #0001;overflow:hidden}
-.top{display:flex;align-items:center;gap:10px;padding:12px 14px;text-decoration:none;color:inherit}
-.top:active{background:color-mix(in srgb,var(--tc,var(--acc)) 10%,transparent)}
-.tt{flex:1;min-width:0}
-.go{flex:none;display:flex;flex-direction:column;align-items:center;font-size:.72rem;font-weight:700;color:var(--tc,var(--acc))}
-.prep{padding:10px 14px 12px;border-top:1px solid var(--line)}
+.hero{height:210px;overflow:hidden;border-radius:0 0 26px 26px}
+.hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.plate{position:relative;margin:-34px 16px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px #0001}
+.plate img{width:44px;height:44px;border-radius:50%}
+h1{font:700 1.6rem Georgia,serif;margin:0;line-height:1.1}
+.plate small{color:var(--mut)}
+#list{margin:0 16px}
+footer{margin-left:16px;margin-right:16px}
+.tc{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 14px;box-shadow:0 1px 3px #0001;overflow:hidden}
+.top{position:relative;display:flex;align-items:center;gap:10px;padding:13px 14px 15px 16px;text-decoration:none;color:#fbf9f3;background:var(--hc,var(--acc))}
+.top:active{filter:brightness(.92)}
+.topo{position:absolute;inset:0;width:100%;height:100%;opacity:.16;pointer-events:none}
+.tt{position:relative;flex:1;min-width:0}
+.tt h2{font:700 1.22rem Georgia,serif;margin:0 0 5px;line-height:1.22}
+.sub{display:flex;align-items:center;flex-wrap:wrap;gap:4px 9px;font-size:.84rem}
+.sub span.rg{opacity:.92}
+.kp{flex:none;background:#fbf9f3;color:var(--hc);font-weight:700;font-size:.72rem;padding:2px 10px;border-radius:12px}
+.go{position:relative;flex:none;display:flex;color:#fbf9f3}
+.body{padding:11px 14px 0}
+.ms{display:flex;flex-direction:column;gap:3px;font-size:.8rem;color:var(--mut)}.ms span{display:flex;gap:6px;align-items:center}.ms span svg{flex:none}.ms .big{color:var(--fg);font-weight:600;font-size:.86rem}
+.prep{padding:11px 14px 14px}
 .pr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pr.one{grid-template-columns:1fr}
 .pb{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:8px;font-weight:700;font-size:.82rem;white-space:nowrap;text-decoration:none;color:var(--tc,var(--acc));background:color-mix(in srgb,var(--tc,var(--acc)) 14%,var(--card));border:1px solid color-mix(in srgb,var(--tc,var(--acc)) 35%,var(--line))}
 .pb:active{transform:scale(.98)}
 .pb.off{opacity:.55;border-style:dashed;background:transparent;cursor:default}.pb.off:active{transform:none}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translateX(-50%);background:var(--card);color:var(--fg);border:1px solid var(--line);padding:8px 14px;border-radius:16px;font-size:.85rem;display:none;z-index:10}
-.th{display:flex;align-items:flex-start;gap:8px;justify-content:space-between}
-.th b{font:700 1.08rem Georgia,serif}
-.pill{flex:none;display:inline-flex;align-items:center;justify-content:center;width:4.6rem;height:1.57rem;margin-right:12px;background:var(--acc);color:var(--bg);font-weight:700;font-size:.75rem;padding:0 10px;border-radius:14px}
-.tc small{display:block;color:var(--mut)}
-.tc .ms2{display:flex;flex-wrap:wrap;gap:0 12px;margin-top:4px;font-size:.78rem}.tc .ms2 small{display:inline}
-.tag{color:var(--hi);font-weight:700;font-size:.75rem;margin-bottom:2px}.tag.fin{color:var(--mut)}
+.fin{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.9;margin-bottom:3px}
 .msg{color:var(--mut)}
-.past{margin:6px 0 0;background:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;font-size:.85rem}.past summary{color:var(--mut);cursor:pointer;padding:4px 0;font-weight:600}.past ol{list-style:none;margin:6px 0 4px;padding:0}.past li{display:flex;gap:12px;padding:5px 0;border-top:1px solid var(--line)}.past li b{flex:none;width:2.6rem;color:var(--acc)}.past li.sk{color:var(--mut);font-style:italic}
+.past{margin:6px 16px 0;background:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;font-size:.85rem}.past summary{color:var(--mut);cursor:pointer;padding:4px 0;font-weight:600}.past ol{list-style:none;margin:6px 0 4px;padding:0}.past li{display:flex;gap:12px;padding:5px 0;border-top:1px solid var(--line)}.past li b{flex:none;width:2.6rem;color:var(--acc)}.past li.sk{color:var(--mut);font-style:italic}
 footer{margin-top:22px;color:var(--mut);font-size:.78rem}
 footer a{color:var(--mut)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <main>
-<header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
+<div class="hero"><img src="banner.svg" alt=""></div><div class="plate"><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></div>
 <div id="list"><p class="msg">Loading trips…</p></div>
 <details class="past"><summary>Past trips</summary><ol id="past"></ol></details><div id="toast"></div>
-<footer>App version 25 · <a href="reset.html">App check</a></footer>
+<footer>App version 26 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=25"></script>
+<script src="theme.js?v=26"></script>
 <script>
 // Home is the top of the app: the back swipe does nothing here (installed app only)
 try{if(navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)){history.pushState({home:1},"");addEventListener("popstate",function(){history.pushState({home:1},"")})}}catch(e){}
-var V=24,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=26,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function addDays(s,n){return new Date(Date.parse(s+"T00:00:00Z")+n*864e5).toISOString().slice(0,10)}
 function today(){var t=new Date();return t.getFullYear()+"-"+("0"+(t.getMonth()+1)).slice(-2)+"-"+("0"+t.getDate()).slice(-2)}
@@ -59,22 +65,26 @@ function show(trips){
   if(!trips.length){box.appendChild(el("p","msg","No trips yet."));return}
   trips=trips.slice().sort(function(a,b){return (b.id==last)-(a.id==last)});
   trips.forEach(function(t){
-    var card=el("div","tc"+(t.id==last?" last":"")),th=themeOf(t.activity),tc=(dark?th.dark:th.light).acc;card.style.borderLeftColor=tc;card.style.setProperty("--tc",tc);
-    var a=el("a","top");a.href="trip.html?t="+encodeURIComponent(t.id);var tt=el("div","tt");
-    if(t.id==last)tt.appendChild(el("div","tag","Last opened"));
-    var dn=doneOf(t);if(dn)tt.appendChild(el("div","tag fin","Finished "+new Date(dn+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",year:"numeric",timeZone:"UTC"})));
-    var h=el("div","th");h.appendChild(el("b","",t.name));var pl=el("span","pill",KIND[t.activity]||"Trip");pl.style.background=tc;h.appendChild(pl);tt.appendChild(h);
-    var bits=[t.region,t.days+(t.days==1?" day":" days"),t.km+" km"].filter(Boolean);tt.appendChild(el("small","",bits.join(" · ")));
-    var m=null;try{m=JSON.parse(ls(t.id+":map")||"null")}catch(e){}
-    var sd=startOf(t),ln=el("div","ms2"),ds=sd?"Starts "+new Date(sd+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):dn?"":"No date selected";
-    if(ds)ln.appendChild(el("small","",ds));ln.appendChild(el("small","",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved"));tt.appendChild(ln);
+    var card=el("div","tc"),th=themeOf(t.activity),tc=(dark?th.dark:th.light).acc;card.style.setProperty("--tc",tc);card.style.setProperty("--hc",th.theme);
+    var a=el("a","top");a.href="trip.html?t="+encodeURIComponent(t.id);a.insertAdjacentHTML("beforeend",TOPO);var tt=el("div","tt");
+    var dn=doneOf(t);if(dn)tt.appendChild(el("div","fin","Finished "+new Date(dn+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",year:"numeric",timeZone:"UTC"})));
+    tt.appendChild(el("h2","",t.name));
+    var sb=el("div","sub");if(t.region)sb.appendChild(el("span","rg",t.region));sb.appendChild(el("span","kp",KIND[t.activity]||"Trip"));tt.appendChild(sb);
     a.appendChild(tt);var go=el("div","go");go.innerHTML=ICON.go;go.setAttribute("aria-hidden","true");a.appendChild(go);card.appendChild(a);
+    var bits=[t.days+(t.days==1?" day":" days"),t.km+" km"].filter(Boolean);
+    var m=null;try{m=JSON.parse(ls(t.id+":map")||"null")}catch(e){}
+    var sd=startOf(t),ds=sd?"Starts "+new Date(sd+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):dn?"":"No date selected";
+    var ms=el("div","ms"),r1=el("span","big",bits.join(" \u00b7 "));ms.appendChild(r1);
+    if(ds){var r2=el("span","");r2.innerHTML=ICON.cal;r2.appendChild(el("span","",ds));ms.appendChild(r2)}
+    var r3=el("span","");r3.innerHTML=ICON.map;r3.appendChild(el("span","",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved"));ms.appendChild(r3);
+    var bd=el("div","body");bd.appendChild(ms);card.appendChild(bd);
     var pp=t.prep||{},items=[["packing","Packing list",ICON.list],["logistics","Pre-trip logistics",ICON.clip]].filter(function(x){return typeof pp[x[0]]=="string"&&(/^https:\/\//.test(pp[x[0]])||pp[x[0]]=="soon")});
     if(items.length){var pd=el("div","prep");var row=el("div","pr"+(items.length==1?" one":""));
      items.forEach(function(x){if(pp[x[0]]=="soon"){var o=el("span","pb off");o.innerHTML=x[2];o.appendChild(el("span","",(x[0]=="packing"?"Packing":"Logistics")+" (soon)"));row.appendChild(o);return}var b=el("a","pb");b.href=pp[x[0]];b.target="_blank";b.rel="noopener noreferrer";b.innerHTML=x[2];b.appendChild(el("span","",x[1]));b.onclick=function(e){if(navigator.onLine===false){e.preventDefault();toast("Needs internet. This link opens a Google file.")}};row.appendChild(b)});
      pd.appendChild(row);card.appendChild(pd)}
     box.appendChild(card)})}
-var ICON={go:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',list:'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M22 7h-9v2h9V7zm0 8h-9v2h9v-2zM5.54 11L2 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L5.54 11zm0 8L2 15.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L5.54 19z"/></svg>',clip:'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>'};
+var TOPO='<svg class="topo" viewBox="0 0 360 120" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-width="1.2" aria-hidden="true"><path d="M-10 90q60-50 120-20t120-30 140 10"/><path d="M-10 74q60-50 120-20t120-30 140 10"/><path d="M-10 58q60-50 120-20t120-30 140 10"/><path d="M-10 106q60-50 120-20t120-30 140 10"/><path d="M-10 122q60-50 120-20t120-30 140 10"/></svg>';
+var ICON={cal:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',map:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5l6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>',go:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',list:'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M22 7h-9v2h9V7zm0 8h-9v2h9v-2zM5.54 11L2 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L5.54 11zm0 8L2 15.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L5.54 19z"/></svg>',clip:'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>'};
 var PAST=[[2014,"Sayward"],[2015,"Broken Group Islands"],[2016,"Della Falls"],[2017,"Skipped"],[2018,"Powell River Lake Loop"],[2019,"Cape Scott"],[2020,"Augerpoint Traverse"],[2021,"Saltspring"],[2022,"Kettle Valley Railway"],[2023,"Sayward"],[2024,"Flores Island"],[2025,"Desolation Sound"],[2026,"Marble Meadows"]];
 // Past trips, newest first. A trip in trips/index.json with "done": <year> (and "short": "<name>") is added automatically.
 function showPast(trips){var o=document.getElementById("past"),all=PAST.slice();
