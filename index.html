@@ -27,7 +27,7 @@ header small{color:var(--mut)}
 .th b{font:700 1.08rem Georgia,serif}
 .pill{flex:none;display:inline-flex;align-items:center;justify-content:center;width:4.6rem;height:1.57rem;margin-right:12px;background:var(--acc);color:var(--bg);font-weight:700;font-size:.75rem;padding:0 10px;border-radius:14px}
 .tc small{display:block;color:var(--mut)}
-.tc .ms{margin-top:4px;font-size:.78rem}
+.tc .ms2{display:flex;flex-wrap:wrap;gap:0 12px;margin-top:4px;font-size:.78rem}.tc .ms2 small{display:inline}
 .tag{color:var(--hi);font-weight:700;font-size:.75rem;margin-bottom:2px}.tag.fin{color:var(--mut)}
 .msg{color:var(--mut)}
 .past{margin:6px 0 0;background:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;font-size:.85rem}.past summary{color:var(--mut);cursor:pointer;padding:4px 0;font-weight:600}.past ol{list-style:none;margin:6px 0 4px;padding:0}.past li{display:flex;gap:12px;padding:5px 0;border-top:1px solid var(--line)}.past li b{flex:none;width:2.6rem;color:var(--acc)}.past li.sk{color:var(--mut);font-style:italic}
@@ -39,19 +39,20 @@ footer a{color:var(--mut)}
 <header><img src="logo.svg" alt=""><div><h1>500 More</h1><small>Trip itineraries</small></div></header>
 <div id="list"><p class="msg">Loading trips…</p></div>
 <details class="past"><summary>Past trips</summary><ol id="past"></ol></details><div id="toast"></div>
-<footer>App version 23 · <a href="reset.html">App check</a></footer>
+<footer>App version 24 · <a href="reset.html">App check</a></footer>
 </main>
-<script src="theme.js?v=23"></script>
+<script src="theme.js?v=24"></script>
 <script>
 // Home is the top of the app: the back swipe does nothing here (installed app only)
 try{if(navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)){history.pushState({home:1},"");addEventListener("popstate",function(){history.pushState({home:1},"")})}}catch(e){}
-var V=23,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
+var V=24,KIND={hike:"Hike",bike:"Bike",paddle:"Paddle"};
 function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function addDays(s,n){return new Date(Date.parse(s+"T00:00:00Z")+n*864e5).toISOString().slice(0,10)}
 function today(){var t=new Date();return t.getFullYear()+"-"+("0"+(t.getMonth()+1)).slice(-2)+"-"+("0"+t.getDate()).slice(-2)}
 function okD(x){return /^\d{4}-\d\d-\d\d$/.test(x||"")?x:""}
 // last day of a trip that is over (3 days after its last day), or "" if it is not over or has no date
 function doneOf(t){try{var g=okD(t.startDate),o=okD(ls(t.id+":sd")),c=[o,g],i;for(i=0;i<2;i++)if(c[i]&&today()<=addDays(c[i],t.days+2))return"";var x=g||o;return x?addDays(x,t.days-1):""}catch(e){return""}}
+function startOf(t){try{var c=[okD(ls(t.id+":sd")),okD(t.startDate)],i;for(i=0;i<2;i++)if(c[i]&&today()<=addDays(c[i],t.days+2))return c[i];return""}catch(e){return""}}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(trips){
   var box=document.getElementById("list"),last=ls("lastTrip"),dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);box.textContent="";
@@ -65,7 +66,8 @@ function show(trips){
     var h=el("div","th");h.appendChild(el("b","",t.name));var pl=el("span","pill",KIND[t.activity]||"Trip");pl.style.background=tc;h.appendChild(pl);tt.appendChild(h);
     var bits=[t.region,t.days+(t.days==1?" day":" days"),t.km+" km"].filter(Boolean);tt.appendChild(el("small","",bits.join(" · ")));
     var m=null;try{m=JSON.parse(ls(t.id+":map")||"null")}catch(e){}
-    tt.appendChild(el("small","ms",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved yet"));
+    var sd=startOf(t),ln=el("div","ms2"),ds=sd?"Starts "+new Date(sd+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):dn?"":"No date selected";
+    if(ds)ln.appendChild(el("small","",ds));ln.appendChild(el("small","",m?"Map saved for offline use ("+new Date(m.t).toLocaleDateString("en-CA")+")":"Map not saved"));tt.appendChild(ln);
     a.appendChild(tt);var go=el("div","go");go.innerHTML=ICON.go;go.setAttribute("aria-hidden","true");a.appendChild(go);card.appendChild(a);
     var pp=t.prep||{},items=[["packing","Packing list",ICON.list],["logistics","Pre-trip logistics",ICON.clip]].filter(function(x){return typeof pp[x[0]]=="string"&&(/^https:\/\//.test(pp[x[0]])||pp[x[0]]=="soon")});
     if(items.length){var pd=el("div","prep");var row=el("div","pr"+(items.length==1?" one":""));
@@ -81,7 +83,8 @@ function showPast(trips){var o=document.getElementById("past"),all=PAST.slice();
  o.textContent="";all.forEach(function(p){var li=el("li",p.n=="Skipped"?"sk":"");li.appendChild(el("b","",String(p.y)));li.appendChild(el("span","",p.n));o.appendChild(li)})}
 showPast([]);
 function toast(t){var e=document.getElementById("toast");e.textContent=t;e.style.display="block";setTimeout(function(){e.style.display="none"},4000)}
-fetch("trips/index.json?v="+V).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(j){show(j.trips||[]);showPast(j.trips||[])}).catch(function(e){var b=document.getElementById("list");b.textContent="";b.appendChild(el("p","msg","Could not load the trips ("+e.message+"). Open the app once with a connection."))});
+function loadTrips(){fetch("trips/index.json?v="+V).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(j){show(j.trips||[]);showPast(j.trips||[])}).catch(function(e){var b=document.getElementById("list");b.textContent="";b.appendChild(el("p","msg","Could not load the trips ("+e.message+"). Open the app once with a connection."))})}
+loadTrips();addEventListener("pageshow",function(e){if(e.persisted)loadTrips()});document.addEventListener("visibilitychange",function(){if(document.visibilityState=="visible")loadTrips()});
 if("serviceWorker" in navigator){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener("controllerchange",function(){if(had)location.reload();had=true});navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){r.update()})}
 </script>
 </body></html>
